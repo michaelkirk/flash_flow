@@ -40,22 +40,26 @@ module FlashFlow
         @lock.with_lock do
           open_pull_request
 
-          @git.reset_merge_branch
-          @git.in_merge_branch do
+          @git.reset_temp_merge_branch
+          @git.in_temp_merge_branch do
             merge_branches
+            require 'byebug'; debugger
             commit_branch_info
             @git.commit_rerere
           end
 
+          @git.copy_temp_to_merge_branch
+          @git.delete_temp_merge_branch
           @git.push_merge_branch
         end
 
         print_errors
         logger.info "### Finished #{@git.merge_branch} merge ###"
       rescue Lock::Error, OutOfSyncWithRemote => e
-        @git.run("checkout #{@git.working_branch}")
         puts 'Failure!'
         puts e.message
+      ensure
+        @git.run("checkout #{@git.working_branch}")
       end
     end
 
