@@ -1,5 +1,21 @@
 # Flash Flow
 
+Flash Flow coordinates multiple developers who have busy product managers, thorough code revies, and rapid deloyments.
+
+### In a simple world
+
+An engineer wants to build a new feature. She begins by branching off of master, making some commits, and submitting her code for review. Another equally eager engineer instantly reviews the code, finds no defects, and deploys the code to an accetance environment. The Product mangager, also increally eager and available promptly reviews this single feature, in isolation, and it works as expected. Wonderful! The product manager gives their go ahead, and the single feature for the day is deployed to production by merging it into master.
+
+### In the real world
+
+There are lots of engineers simultaneousoly working on stories, not always perfectly defined. Product managers are busy, and lump their acceptance time so that multiple new features need to be reviewed in sequential time. Often there is pushback in code review and in behavioral acceptance. Bother of these can cause back-and-forth and significant delays, even when the development of the fixes are often trivial (*typo, move it over here, make it bigger, etc.*). 
+
+### Problems that Flash Flow tries to solve
+
+1. At first there was only git. And it was beautiful, and it was raw, and it was completely without suggestion for a workflow.
+2. And then [git-flow]() hit the scene. It offered an opinionated workflow of how to move features from an individual developer (*feature/my-new-feature*) to internally shared (*develop*) to the production (*master*). But over time, develop and master would drift, or a feature would get prematurely merged into develop which wasn't ready for production, and thus block other features *which were ready* from being deployed. 
+3. [Github-flow]() addressed this by getting rid of the development branch. All features were tested in isolation, and no feature was merged into master until it was ready to be deployed.
+4. But this causes features to be deployed divorced of the context of other features which they are likely to coexist with, and does not mirror our real world exerience with building software, where product managers time is limited, and engineers have imortant feedback in code reviews, and serializing this process seriously hinders our ability to deliver features quickly.
 
 ## Installation
 
